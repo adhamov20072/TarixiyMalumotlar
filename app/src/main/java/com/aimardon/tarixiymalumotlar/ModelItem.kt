@@ -1,6 +1,6 @@
 package com.aimardon.tarixiymalumotlar
-
 data class ModelItem(
-    val img:String,
-    val ism:String
+    val imageUrl:String,
+    val binoNomi: String,
+    var haqida: String
 )

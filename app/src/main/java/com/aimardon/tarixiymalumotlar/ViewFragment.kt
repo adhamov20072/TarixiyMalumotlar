@@ -1,12 +1,12 @@
 package com.aimardon.tarixiymalumotlar
 
+import android.icu.text.Transliterator.Position
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.aimardon.tarixiymalumotlar.databinding.FragmentHomeBinding
 import com.aimardon.tarixiymalumotlar.databinding.FragmentViewBinding
 
 
@@ -21,6 +21,7 @@ class ViewFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.textView.text=HomeFragment().arguments?.getString("amout")
         binding.imageButton.setOnClickListener {
             findNavController().navigate(R.id.action_viewFragment_to_homeFragment)
         }

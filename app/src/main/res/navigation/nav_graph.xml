@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_viewFragment"
             app:destination="@id/viewFragment" />
+        <argument
+            android:name="History"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/viewFragment"

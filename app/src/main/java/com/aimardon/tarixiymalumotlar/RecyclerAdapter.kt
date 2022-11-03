@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aimardon.tarixiymalumotlar.databinding.RecyclerItemBinding
 import com.bumptech.glide.Glide
+import org.intellij.lang.annotations.JdkConstants.TitledBorderTitlePosition
 
 class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(diffUtil) {
-    var listener:onclick?=null
+    var listener:Onclick?=null
+    var A:Int?=null
     class MyViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root)
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ModelItem>() {
@@ -19,7 +21,7 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
             }
 
             override fun areContentsTheSame(oldItem: ModelItem, newItem: ModelItem): Boolean {
-                return oldItem == newItem
+                return oldItem.binoNomi == newItem.binoNomi
             }
         }
     }
@@ -37,21 +39,26 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.apply {
-            TextView.text = item.ism
+            TextView.text = item.binoNomi.toString()
             (Glide.with(holder.itemView)
-                .load(item.img)
+                .load(item.imageUrl)
                 .into(holder.binding.imgview))
             IIIitem.setOnClickListener {
+                val a=onitem(position)
+                A=a
                 listener?.click()
             }
         }
     }
 
-    interface onclick {
+    interface Onclick {
         fun click()
     }
-    fun seton (onclick: onclick){
+    fun seton (onclick: Onclick){
         listener=onclick
+    }
+    fun onitem(position: Int):Int{
+        return position
     }
 }
 
