@@ -85,8 +85,8 @@ class HomeFragment : Fragment() {
             override fun click() {
                 val clickpostion = recyclerAdapter.onitem(recyclerAdapter.A!!)
                 val haqida = a[clickpostion].haqida
-                val bundle = bundleOf("amount" to haqida)
-                findNavController().navigate(R.id.action_homeFragment_to_viewFragment,bundle)
+                val action=HomeFragmentDirections.actionHomeFragmentToViewFragment(arrayOf(haqida))
+                findNavController().navigate(action)
             }
         })
     }

@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_viewFragment"
             app:destination="@id/viewFragment" />
-        <argument
-            android:name="History"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/viewFragment"
@@ -25,5 +22,10 @@
         <action
             android:id="@+id/action_viewFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="Tarix"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

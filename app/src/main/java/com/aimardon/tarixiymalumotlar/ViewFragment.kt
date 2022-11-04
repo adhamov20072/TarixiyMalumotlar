@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.aimardon.tarixiymalumotlar.databinding.FragmentViewBinding
 
 
 class ViewFragment : Fragment() {
  lateinit var binding:FragmentViewBinding
+ val args:ViewFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,7 +23,8 @@ class ViewFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.textView.text=HomeFragment().arguments?.getString("amout")
+        val tarixiyMalumot=args.tarix
+        binding.textView.text= tarixiyMalumot.toString()
         binding.imageButton.setOnClickListener {
             findNavController().navigate(R.id.action_viewFragment_to_homeFragment)
         }
