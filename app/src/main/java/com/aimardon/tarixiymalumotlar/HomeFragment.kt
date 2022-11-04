@@ -1,14 +1,10 @@
 package com.aimardon.tarixiymalumotlar
 
 import android.os.Bundle
-import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import com.aimardon.tarixiymalumotlar.databinding.FragmentHomeBinding
 
@@ -83,9 +79,10 @@ class HomeFragment : Fragment() {
         recyclerAdapter.submitList(a)
         recyclerAdapter.seton(object : RecyclerAdapter.Onclick {
             override fun click() {
-                val clickpostion = recyclerAdapter.onitem(recyclerAdapter.A!!)
-                val haqida = a[clickpostion].haqida
-                val action=HomeFragmentDirections.actionHomeFragmentToViewFragment(arrayOf(haqida))
+                val clickpostion = recyclerAdapter.A
+                val haqida=a[clickpostion!!].haqida
+                val toSString=ModelItem2(haqida).toString()
+                val action=HomeFragmentDirections.actionHomeFragmentToViewFragment(toSString)
                 findNavController().navigate(action)
             }
         })
