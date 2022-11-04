@@ -1,7 +1,19 @@
 package com.aimardon.tarixiymalumotlar
 
+import android.app.Application
+import android.content.Context
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +22,9 @@ import com.bumptech.glide.Glide
 import org.intellij.lang.annotations.JdkConstants.TitledBorderTitlePosition
 
 class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(diffUtil) {
-    var listener:Onclick?=null
-    var A:Int?=null
+    var listener: Onclick? = null
+    var A: Int? = null
+
     class MyViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root)
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ModelItem>() {
@@ -36,16 +49,16 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.apply {
-            TextView.text = item.binoNomi.toString()
-            (Glide.with(holder.itemView)
-                .load(item.imageUrl)
-                .into(holder.binding.imgview))
+            TextView.text = item.binoNomi
+                (Glide.with(holder.itemView).load(item.imageUrl).into(holder.binding.imgview))
+                imgview.visibility=View.VISIBLE
             IIIitem.setOnClickListener {
-                val a=onitem(position)
-                A=a
+                val a = onitem(position)
+                A = a
                 listener?.click()
             }
         }
@@ -54,10 +67,12 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
     interface Onclick {
         fun click()
     }
-    fun seton (onclick: Onclick){
-        listener=onclick
+
+    fun seton(onclick: Onclick) {
+        listener = onclick
     }
-    fun onitem(position: Int):Int{
+
+    fun onitem(position: Int): Int {
         return position
     }
 }

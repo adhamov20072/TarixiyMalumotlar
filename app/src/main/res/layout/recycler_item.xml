@@ -4,34 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    app:cardCornerRadius="25dp"
-    app:cardMaxElevation="5dp"
     android:layout_margin="10dp"
-    app:cardElevation="10dp">
+    app:cardCornerRadius="25dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/IIIitem"
+        android:id="@+id/IIIitem"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgview"
-            android:scaleType="centerCrop"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
+            android:id="@+id/TextView"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:gravity="start"
             android:maxLines="1"
-            android:id="@+id/TextView"
             android:text=""
-            android:layout_marginStart="20dp"
-            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imgview"
