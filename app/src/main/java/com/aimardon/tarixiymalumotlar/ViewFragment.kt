@@ -14,7 +14,6 @@ import com.aimardon.tarixiymalumotlar.databinding.FragmentViewBinding
 
 class ViewFragment : Fragment() {
     lateinit var binding: FragmentViewBinding
-    val args:ViewFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +24,7 @@ class ViewFragment : Fragment() {
 
     @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.textView.text = args.tarix
+        binding.textView.text = arguments?.getParcelable<ModelItem>("key")?.haqida
             binding.imageButton.setOnClickListener {
                 findNavController().navigate(R.id.action_viewFragment_to_homeFragment)
             }

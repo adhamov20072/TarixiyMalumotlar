@@ -82,9 +82,8 @@ class HomeFragment : Fragment() {
             )
         )
         recyclerAdapter = RecyclerAdapter {
-            val haqidaString=it.haqida
-            HomeFragmentDirections.actionHomeFragmentToViewFragment(haqidaString)
-            findNavController().navigate(R.id.action_homeFragment_to_viewFragment)
+            val haqidaString= bundleOf("key" to it)
+            findNavController().navigate(R.id.action_homeFragment_to_viewFragment,haqidaString)
         }
         binding.recyclerView.adapter = recyclerAdapter
         recyclerAdapter.submitList(List)
