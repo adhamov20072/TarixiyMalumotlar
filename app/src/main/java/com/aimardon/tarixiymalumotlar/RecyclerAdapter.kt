@@ -1,5 +1,6 @@
 package com.aimardon.tarixiymalumotlar
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
@@ -21,9 +22,7 @@ import com.aimardon.tarixiymalumotlar.databinding.RecyclerItemBinding
 import com.bumptech.glide.Glide
 import org.intellij.lang.annotations.JdkConstants.TitledBorderTitlePosition
 
-class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(diffUtil) {
-    var listener: Onclick? = null
-    var A: Int? = null
+class RecyclerAdapter(val clicklistener:(ModelItem) -> Unit) : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(diffUtil) {
 
     class MyViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root)
     companion object {
@@ -49,6 +48,7 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
         )
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
@@ -56,24 +56,11 @@ class RecyclerAdapter : ListAdapter<ModelItem, RecyclerAdapter.MyViewHolder>(dif
             TextView.text = item.binoNomi
                 (Glide.with(holder.itemView).load(item.imageUrl).into(holder.binding.imgview))
                 imgview.visibility=View.VISIBLE
-            IIIitem.setOnClickListener {
-                val a = onitem(position)
-                A = a
-                listener?.click()
-            }
+
         }
-    }
-
-    interface Onclick {
-        fun click()
-    }
-
-    fun seton(onclick: Onclick) {
-        listener = onclick
-    }
-
-    fun onitem(position: Int): Int {
-        return position
+        holder.itemView.setOnClickListener {
+            clicklistener(item)
+        }
     }
 }
 
